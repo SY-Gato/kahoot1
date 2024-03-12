@@ -7,7 +7,26 @@
     <input id="gameid" type="number" placeholder="Game Id" spellcheck="off"></input>
     <button id="DoIt" onclick="doit()">Do It!</button>
     <script>
-      
+      document.addEventListener('DOMContentLoaded', function() {
+        const IdElement = document.getElementById("gameid");
+        function doit() {
+          let id = String(parseInt(IdElement.value));
+          if (id != 0 && id != NaN) {
+            try {
+            let api = "https://play.kahoot.it/rest/kahoots/";
+            if ("^[A-Za-z0-9-]*$".test(id)) {
+              link = api+id;
+              data = fetch(link, {
+                method: 'GET'
+              });
+              alert(data);
+            }
+            } catch (e) {
+              alert("Unexpected Error Occured: "+String(e));
+            }
+          }
+        }
+      });
     </script>
   </body>
 </html>
