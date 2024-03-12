@@ -18,7 +18,13 @@
               link = api+id;
               data = fetch(link, {
                 method: 'GET'
-              });
+              }).then((response) => {
+                if (response.ok) return response.blob()
+                else {
+                  alert("Unexpected Error Occured. "+String(response.status));
+                  return false;
+                }
+              };
               alert(data);
             }
             } catch (e) {
